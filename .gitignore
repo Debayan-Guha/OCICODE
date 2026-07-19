@@ -1,0 +1,206 @@
+# ========================================
+# TERRAFORM FILES
+# ========================================
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Terraform configuration files
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars
+*.terraform.tfvars
+
+# Terraform crash logs
+crash.log
+crash.*.log
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI configuration
+.terraformrc
+terraform.rc
+
+# ========================================
+# SECURITY & CREDENTIALS
+# ========================================
+
+# Provider credentials (main)
+provider.tf
+
+# Secret files - KEEP directory but ignore sensitive content
+secrets/*.pem
+secrets/*.key
+secrets/*.crt
+secrets/*.csr
+secrets/*.p12
+secrets/*.pfx
+secrets/*.cer
+secrets/*.der
+secrets/*.secret
+secrets/*.secrets
+secrets/*.private
+secrets/*.id_rsa
+secrets/*.id_ecdsa
+secrets/*.id_ed25519
+secrets/*.gpg
+secrets/*.asc
+
+# Generic credential files
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+*.cer
+*.der
+*.secret
+*.secrets
+*.private
+*.id_rsa
+*.id_ecdsa
+*.id_ed25519
+*.gpg
+*.asc
+
+# ========================================
+# OPERATING SYSTEM FILES
+# ========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Log files
+*.log
+*.tmp
+*.temp
+
+# ========================================
+# IDE & EDITOR FILES
+# ========================================
+
+# VS Code
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IntelliJ IDEA / JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# Sublime Text
+*.sublime-*
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*~
+*.un~
+
+# Emacs
+*#
+*.elc
+
+# ========================================
+# BACKUP & TEMPORARY FILES
+# ========================================
+
+*.backup
+*.bak
+*.old
+*.orig
+*.tmp
+*.temp
+
+# ========================================
+# TERRFORM MODULE FILES (All Directories)
+# ========================================
+
+# All .terraform directories
+**/.terraform/
+**/.terraform.lock.hcl
+
+# All Terraform state files
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/*.tfstate
+**/*.tfstate.backup
+
+# ========================================
+# GLOBAL COMPARTMENT
+# ========================================
+
+global/compartment/.terraform/
+global/compartment/.terraform.lock.hcl
+global/compartment/terraform.tfstate
+global/compartment/terraform.tfstate.backup
+global/compartment/*.tfstate
+global/compartment/*.tfstate.backup
+
+# ========================================
+# ENVIRONMENT: DEV COMPARTMENT
+# ========================================
+
+environment/dev/compartment/.terraform/
+environment/dev/compartment/.terraform.lock.hcl
+environment/dev/compartment/terraform.tfstate
+environment/dev/compartment/terraform.tfstate.backup
+environment/dev/compartment/*.tfstate
+environment/dev/compartment/*.tfstate.backup
+
+# ========================================
+# ENVIRONMENT: DEV NETWORKING
+# ========================================
+
+environment/dev/networking/.terraform/
+environment/dev/networking/.terraform.lock.hcl
+environment/dev/networking/terraform.tfstate
+environment/dev/networking/terraform.tfstate.backup
+environment/dev/networking/*.tfstate
+environment/dev/networking/*.tfstate.backup
+
+# ========================================
+# EXCEPTIONS (Keep these files)
+# ========================================
+
+# Keep provider directory structure
+!provider/.gitkeep
+
+# Keep secrets directory structure
+!secrets/.gitkeep
+
+# Keep empty directories
+!**/.gitkeep
