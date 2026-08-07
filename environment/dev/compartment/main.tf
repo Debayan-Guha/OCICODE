@@ -1,4 +1,5 @@
-module "cmp" {
+# 1. Dev Compartment
+module "dev_cmp" {
   source = "../../../modules/compartment"
 
   parent_cmp_id   = local.compartment_ids["app_cmp"]
@@ -6,12 +7,35 @@ module "cmp" {
   cmp_description = var.cmp_description
 }
 
-module "sub_cmps" {
+# Level 1: Hub & Spoke Compartments
+module "hub_and_spoke_cmps" {
   source = "../../../modules/compartment"
 
-  for_each = var.sub_cmps
+  for_each = var.hub_and_spoke_cmps
 
-  parent_cmp_id   = module.cmp.cmp_id
+  parent_cmp_id   = module.dev_cmp.cmp_id
+  cmp_name        = each.value.cmp_name
+  cmp_description = each.value.cmp_description
+}
+
+# Level 2: Inner Compartments inside HUB
+module "hub_inner_cmps" {
+  source = "../../../modules/compartment"
+
+  for_each = var.hub_inner_cmps
+
+  parent_cmp_id   = module.hub_and_spoke_cmps["flipkart_dev_hub_cmp_key"].cmp_id
+  cmp_name        = each.value.cmp_name
+  cmp_description = each.value.cmp_description
+}
+
+# Level 2: Inner Compartments inside SPOKE
+module "spoke1_inner_cmps" {
+  source = "../../../modules/compartment"
+
+  for_each = var.spoke1_inner_cmps
+
+  parent_cmp_id   = module.hub_and_spoke_cmps["flipkart_dev_spoke1_cmp_key"].cmp_id
   cmp_name        = each.value.cmp_name
   cmp_description = each.value.cmp_description
 }

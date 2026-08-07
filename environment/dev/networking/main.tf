@@ -24,7 +24,8 @@ module "sl" {
 module "igw" {
   source = "../../../modules/networking/gw/igw"
 
-  for_each = var.igws
+  # Fallback to {} if var.igws is null
+  for_each = var.igws != null ? var.igws : {}
 
   igw_cmp_id       = local.compartment_ids[each.value.cmp_key]
   igw_display_name = each.value.display_name

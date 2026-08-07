@@ -12,6 +12,7 @@
 # Local directories and plugins
 **/.terraform/
 **/.terraform.lock.hcl
+**/.terraform.tfstate.lock.info
 
 # CLI config
 .terraformrc

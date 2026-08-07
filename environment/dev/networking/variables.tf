@@ -81,6 +81,7 @@ variable "igws" {
     display_name = string
     vcn_key      = string
   }))
+  default = null
 }
 
 variable "rts" {

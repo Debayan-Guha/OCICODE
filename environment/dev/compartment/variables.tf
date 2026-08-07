@@ -8,7 +8,20 @@ variable "cmp_name" {
   description = "The name of the compartment."
 }
 
-variable "sub_cmps" {
+variable "hub_and_spoke_cmps" {
+  type = map(object({
+    cmp_name        = string
+    cmp_description = string
+  }))
+}
+variable "hub_inner_cmps" {
+  type = map(object({
+    cmp_name        = string
+    cmp_description = string
+  }))
+}
+
+variable "spoke1_inner_cmps" {
   type = map(object({
     cmp_name        = string
     cmp_description = string
