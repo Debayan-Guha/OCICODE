@@ -1,10 +1,13 @@
 locals {
-  gateway_inventory = {
+  gateway_inventory = merge(
 
-    # Loops through ALL igws and builds a complete dictionary of keys and IDs
-    "igw" = { for k, v in module.igw : k => v.igw_id }
-  }
-
+    {
+      for k, v in module.igw : k => v.igw_id
+    },
+    {
+      for k, v in module.drg : k => v.drg_id
+    }
+  )
 
 # the merge() function takes two or more maps (or objects) and combines all their key-value pairs into a single, unified map.
   compartment_ids = merge(

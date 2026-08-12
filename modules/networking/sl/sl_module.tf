@@ -17,16 +17,6 @@ resource "oci_core_security_list" "security_list" {
 
       description = egress_security_rules.value.description
 
-      dynamic "icmp_options" {
-
-        for_each = egress_security_rules.value.icmp_options == null ? [] : [egress_security_rules.value.icmp_options]
-
-        content {
-          type = icmp_options.value.type
-        }
-
-      }
-
       dynamic "tcp_options" {
 
         for_each = egress_security_rules.value.tcp_options == null ? [] : [egress_security_rules.value.tcp_options]
@@ -62,16 +52,6 @@ resource "oci_core_security_list" "security_list" {
       source      = ingress_security_rules.value.source
 
       description = ingress_security_rules.value.description
-
-      dynamic "icmp_options" {
-
-        for_each = ingress_security_rules.value.icmp_options == null ? [] : [ingress_security_rules.value.icmp_options]
-
-        content {
-          type = icmp_options.value.type
-        }
-      }
-
 
       dynamic "tcp_options" {
 

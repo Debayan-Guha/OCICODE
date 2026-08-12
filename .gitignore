@@ -25,6 +25,7 @@ terraform.rc
 # Sensitive file extensions (anywhere)
 *.pem
 *.key
+*.pub
 
 # Specific sensitive config files
 provider.tf

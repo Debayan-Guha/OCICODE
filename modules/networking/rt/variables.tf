@@ -13,7 +13,6 @@ variable "rt_display_name" {
 variable "route_rules" {
   type = list(object({
     network_entity_id = string
-    cidr_block        = string
     destination       = string
     destination_type  = string
 

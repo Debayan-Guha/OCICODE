@@ -17,10 +17,6 @@ variable "egress_security_rules" {
     destination_type = string
     description      = optional(string)
 
-    icmp_options = optional(object({
-      type = string
-    }))
-
     tcp_options = optional(object({
 
       destination_port_range = object({
@@ -45,11 +41,7 @@ variable "ingress_security_rules" {
     source      = string
     description = optional(string)
 
-    icmp_options = optional(object({
-      type = string
-    }))
-
-    tcp_options = optional(object({
+      tcp_options = optional(object({
 
       destination_port_range = object({
         max = string

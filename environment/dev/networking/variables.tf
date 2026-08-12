@@ -26,10 +26,6 @@ variable "egress_security_rules" {
     destination_type = string
     description      = optional(string)
 
-    icmp_options = optional(object({
-      type = string
-    }))
-
     tcp_options = optional(object({
 
       destination_port_range = object({
@@ -54,10 +50,6 @@ variable "ingress_security_rules" {
     source      = string
     description = optional(string)
 
-    icmp_options = optional(object({
-      type = string
-    }))
-
     tcp_options = optional(object({
 
       destination_port_range = object({
@@ -75,12 +67,32 @@ variable "ingress_security_rules" {
   default = null
 }
 
-variable "igws" {
+variable "gws" {
+  type = object({
+    igws = map(object({
+      cmp_key      = string
+      display_name = string
+      vcn_key      = string
+    })),
+    drgs = map(object({
+      cmp_key      = string
+      display_name = string
+    }))
+  })
+
+  default = {
+    igws = null,
+    drgs = null
+  }
+}
+
+variable "drg_attachments" {
   type = map(object({
-    cmp_key      = string
+    drg_key      = string
     display_name = string
     vcn_key      = string
   }))
+
   default = null
 }
 
@@ -95,10 +107,8 @@ variable "rts" {
 
 variable "route_rules" {
   type = map(list(object({
-    gw_type = string
-    gw_key  = string
+    gw_key = string
 
-    cidr_block       = string
     destination      = string
     destination_type = string
 

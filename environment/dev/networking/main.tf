@@ -24,12 +24,30 @@ module "sl" {
 module "igw" {
   source = "../../../modules/networking/gw/igw"
 
-  # Fallback to {} if var.igws is null
-  for_each = var.igws != null ? var.igws : {}
+  for_each = var.gws != null && var.gws.igws != null ? var.gws.igws : {}
 
   igw_cmp_id       = local.compartment_ids[each.value.cmp_key]
   igw_display_name = each.value.display_name
   igw_vcn_id       = module.vcn[each.value.vcn_key].vcn_id
+}
+
+module "drg" {
+  source = "../../../modules/networking/gw/drg"
+
+  for_each = var.gws != null && var.gws.drgs != null ? var.gws.drgs : {}
+
+  drg_cmp_id       = local.compartment_ids[each.value.cmp_key]
+  drg_display_name = each.value.display_name
+}
+
+module "drg_attachment" {
+  source = "../../../modules/networking/gw/drg_attachment"
+
+  for_each = var.drg_attachments !=null ? var.drg_attachments : {}
+
+  drg_attachment_drg_id = module.drg[each.value.drg_key].drg_id
+  drg_attachment_display_name = each.value.display_name
+  drg_attachment_vcn_id = module.vcn[each.value.vcn_key].vcn_id
 }
 
 module "rt" {
@@ -44,11 +62,10 @@ module "rt" {
   route_rules = try([
     for rule in var.route_rules[each.value.route_rules_key] : {
 
-      cidr_block       = rule.cidr_block
       destination      = rule.destination
       destination_type = rule.destination_type
 
-      network_entity_id = local.gateway_inventory[rule.gw_type][rule.gw_key]
+      network_entity_id = local.gateway_inventory[rule.gw_key]
 
       description = rule.description
 

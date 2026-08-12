@@ -1,24 +1,21 @@
 ingress_security_rules = {
 
   # 1. Hub VCN Security List Rules
-  "flipkart_dev_hub_private_subnet_sl_ingress_rules_key" = [
+  "flipkart_dev_hub_public_subnet_sl_ingress_rules_key" = [
     {
       source_type = "CIDR_BLOCK"
-      source      = "10.0.1.0/24" # Traffic coming from Spoke1 VCN
-      protocol    = "1"          # ICMP
+      source      = "10.0.0.0/16" # All Spoke VCNs
+      protocol    = "1"           # ICMP
 
-      description = "Allow ICMP Ping from Spoke1 VCN."
-
-      icmp_options = {
-        type = 8
-      }
+      description = "Allow ICMP from Spoke VCNs."
     },
+
     {
       source_type = "CIDR_BLOCK"
-      source      = "10.0.1.0/24" # Traffic coming from Spoke1 VCN
-      protocol    = "6"          # TCP
+      source      = "10.0.0.0/16" # All Spoke VCNs
+      protocol    = "6"           # TCP
 
-      description = "Allow SSH from Spoke1 VCN."
+      description = "Allow SSH from Spoke VCNs."
 
       tcp_options = {
         destination_port_range = {
@@ -26,6 +23,29 @@ ingress_security_rules = {
           max = 22
         }
       }
+    },
+
+    {
+      source_type = "CIDR_BLOCK"
+      source      = "45.123.14.67/32" # Laptop public IP
+      protocol    = "6"               # TCP
+
+      description = "Allow SSH from my laptop."
+
+      tcp_options = {
+        destination_port_range = {
+          min = 22
+          max = 22
+        }
+      }
+    },
+
+    {
+      source_type = "CIDR_BLOCK"
+      source      = "45.123.14.67/32" # Laptop public IP
+      protocol    = "1"               # ICMP
+
+      description = "Allow ICMP from my laptop."
     }
   ],
 
@@ -33,19 +53,16 @@ ingress_security_rules = {
   "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_ingress_rules_key" = [
     {
       source_type = "CIDR_BLOCK"
-      source      = "10.0.0.0/24" # Traffic coming from Hub VCN
-      protocol    = "1"          # ICMP
+      source      = "10.0.0.0/24" # Hub VCN
+      protocol    = "1"           # ICMP
 
-      description = "Allow ICMP Ping from Hub VCN."
-
-      icmp_options = {
-        type = 8
-      }
+      description = "Allow ICMP from Hub VCN."
     },
+
     {
       source_type = "CIDR_BLOCK"
-      source      = "10.0.0.0/24" # Traffic coming from Hub VCN
-      protocol    = "6"          # TCP
+      source      = "10.0.0.0/24" # Hub VCN
+      protocol    = "6"           # TCP
 
       description = "Allow SSH from Hub VCN."
 
@@ -63,24 +80,21 @@ ingress_security_rules = {
 egress_security_rules = {
 
   # 1. Hub VCN Security List Rules
-  "flipkart_dev_hub_private_subnet_sl_egress_rules_key" = [
+  "flipkart_dev_hub_public_subnet_sl_egress_rules_key" = [
     {
       destination_type = "CIDR_BLOCK"
-      destination      = "10.0.1.0/24" # Traffic going to Spoke1 VCN
-      protocol         = "1"          # ICMP
+      destination      = "10.0.0.0/16" # All Spoke VCNs
+      protocol         = "1"           # ICMP
 
-      description = "Allow ICMP Ping to Spoke1 VCN."
-
-      icmp_options = {
-        type = 8
-      }
+      description = "Allow ICMP to Spoke VCNs."
     },
+
     {
       destination_type = "CIDR_BLOCK"
-      destination      = "10.0.1.0/24" # Traffic going to Spoke1 VCN
-      protocol         = "6"          # TCP
+      destination      = "10.0.0.0/16" # All Spoke VCNs
+      protocol         = "6"           # TCP
 
-      description = "Allow SSH to Spoke1 VCN."
+      description = "Allow SSH to Spoke VCNs."
 
       tcp_options = {
         destination_port_range = {
@@ -88,26 +102,32 @@ egress_security_rules = {
           max = 22
         }
       }
-    }
+    },
+
+    # Internet
+  {
+    destination_type = "CIDR_BLOCK"
+    destination      = "0.0.0.0/0"
+    protocol         = "all"
+
+    description = "Allow outbound Internet access."
+  }
   ],
 
   # 2. Spoke1 VCN Security List Rules
   "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_egress_rules_key" = [
     {
       destination_type = "CIDR_BLOCK"
-      destination      = "10.0.0.0/24" # Traffic going to Hub VCN
-      protocol         = "1"          # ICMP
+      destination      = "10.0.0.0/24" # Hub VCN
+      protocol         = "1"           # ICMP
 
-      description = "Allow ICMP Ping to Hub VCN."
-
-      icmp_options = {
-        type = 8
-      }
+      description = "Allow ICMP to Hub VCN."
     },
+
     {
       destination_type = "CIDR_BLOCK"
-      destination      = "10.0.0.0/24" # Traffic going to Hub VCN
-      protocol         = "6"          # TCP
+      destination      = "10.0.0.0/24" # Hub VCN
+      protocol         = "6"           # TCP
 
       description = "Allow SSH to Hub VCN."
 
