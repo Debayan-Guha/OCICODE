@@ -12,15 +12,15 @@ locals {
 # the merge() function takes two or more maps (or objects) and combines all their key-value pairs into a single, unified map.
   compartment_ids = merge(
   # 1. Converts the single string output into a key-value map entry. As in cmp-outputs file this is not map and single id 
-  { "flipkart_dev_cmp_key" = data.terraform_remote_state.dev_compartments.outputs.dev_cmp_id },
+  { "flipkart_dev_cmp" = data.terraform_remote_state.dev_compartments.outputs.dev_cmp_id },
 
-  # Map 2: Already has keys ("flipkart_dev_hub_cmp_key", "flipkart_dev_spoke1_cmp_key")
+  # Map 2: Already has keys ("flipkart_dev_hub_cmp", "flipkart_dev_spoke1_cmp")
   data.terraform_remote_state.dev_compartments.outputs.hub_and_spoke_cmps_ids,
 
-  # Map 3: Already has keys ("flipkart_dev_hub_network_cmp_key", "flipkart_dev_hub_compute_and_storage_cmp_key")
+  # Map 3: Already has keys ("flipkart_dev_hub_network_cmp", "flipkart_dev_hub_compute_and_storage_cmp")
   data.terraform_remote_state.dev_compartments.outputs.hub_inner_cmps_ids,
 
-  # Map 4: Already has keys ("flipkart_dev_spoke1_network_cmp_key", "flipkart_dev_spoke1_compute_and_storage_cmp_key")
+  # Map 4: Already has keys ("flipkart_dev_spoke1_network_cmp", "flipkart_dev_spoke1_compute_and_storage_cmp")
   data.terraform_remote_state.dev_compartments.outputs.spoke1_inner_cmps_ids
 )
 

@@ -10,20 +10,18 @@ variable "cmp_name" {
 
 variable "hub_and_spoke_cmps" {
   type = map(object({
-    cmp_name        = string
     cmp_description = string
   }))
 }
+
 variable "hub_inner_cmps" {
   type = map(object({
-    cmp_name        = string
     cmp_description = string
   }))
 }
 
 variable "spoke1_inner_cmps" {
   type = map(object({
-    cmp_name        = string
     cmp_description = string
   }))
 }

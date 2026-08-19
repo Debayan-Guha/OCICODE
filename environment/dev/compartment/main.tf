@@ -14,7 +14,7 @@ module "hub_and_spoke_cmps" {
   for_each = var.hub_and_spoke_cmps
 
   parent_cmp_id   = module.dev_cmp.cmp_id
-  cmp_name        = each.value.cmp_name
+  cmp_name        = each.key
   cmp_description = each.value.cmp_description
 }
 
@@ -24,8 +24,8 @@ module "hub_inner_cmps" {
 
   for_each = var.hub_inner_cmps
 
-  parent_cmp_id   = module.hub_and_spoke_cmps["flipkart_dev_hub_cmp_key"].cmp_id
-  cmp_name        = each.value.cmp_name
+  parent_cmp_id   = module.hub_and_spoke_cmps["flipkart_dev_hub_cmp"].cmp_id
+  cmp_name        = each.key
   cmp_description = each.value.cmp_description
 }
 
@@ -35,7 +35,7 @@ module "spoke1_inner_cmps" {
 
   for_each = var.spoke1_inner_cmps
 
-  parent_cmp_id   = module.hub_and_spoke_cmps["flipkart_dev_spoke1_cmp_key"].cmp_id
-  cmp_name        = each.value.cmp_name
+  parent_cmp_id   = module.hub_and_spoke_cmps["flipkart_dev_spoke1_cmp"].cmp_id
+  cmp_name        = each.key
   cmp_description = each.value.cmp_description
 }

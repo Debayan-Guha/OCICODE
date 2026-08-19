@@ -1,7 +1,8 @@
 ingress_security_rules = {
 
   # 1. Hub VCN Security List Rules
-  "flipkart_dev_hub_public_subnet_sl_ingress_rules_key" = [
+  "flipkart_dev_hub_public_subnet_sl_ingress_rules" = [
+
     {
       source_type = "CIDR_BLOCK"
       source      = "10.0.0.0/16" # All Spoke VCNs
@@ -19,8 +20,8 @@ ingress_security_rules = {
 
       tcp_options = {
         destination_port_range = {
-          min = 22
-          max = 22
+          min = "22"
+          max = "22"
         }
       }
     },
@@ -34,8 +35,8 @@ ingress_security_rules = {
 
       tcp_options = {
         destination_port_range = {
-          min = 22
-          max = 22
+          min = "22"
+          max = "22"
         }
       }
     },
@@ -50,7 +51,8 @@ ingress_security_rules = {
   ],
 
   # 2. Spoke1 VCN Security List Rules
-  "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_ingress_rules_key" = [
+  "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_ingress_rules" = [
+
     {
       source_type = "CIDR_BLOCK"
       source      = "10.0.0.0/24" # Hub VCN
@@ -68,19 +70,19 @@ ingress_security_rules = {
 
       tcp_options = {
         destination_port_range = {
-          min = 22
-          max = 22
+          min = "22"
+          max = "22"
         }
       }
     }
   ]
-
 }
 
 egress_security_rules = {
 
   # 1. Hub VCN Security List Rules
-  "flipkart_dev_hub_public_subnet_sl_egress_rules_key" = [
+  "flipkart_dev_hub_public_subnet_sl_egress_rules" = [
+
     {
       destination_type = "CIDR_BLOCK"
       destination      = "10.0.0.0/16" # All Spoke VCNs
@@ -98,24 +100,25 @@ egress_security_rules = {
 
       tcp_options = {
         destination_port_range = {
-          min = 22
-          max = 22
+          min = "22"
+          max = "22"
         }
       }
     },
 
     # Internet
-  {
-    destination_type = "CIDR_BLOCK"
-    destination      = "0.0.0.0/0"
-    protocol         = "all"
+    {
+      destination_type = "CIDR_BLOCK"
+      destination      = "0.0.0.0/0"
+      protocol         = "all"
 
-    description = "Allow outbound Internet access."
-  }
+      description = "Allow outbound Internet access."
+    }
   ],
 
   # 2. Spoke1 VCN Security List Rules
-  "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_egress_rules_key" = [
+  "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_egress_rules" = [
+
     {
       destination_type = "CIDR_BLOCK"
       destination      = "10.0.0.0/24" # Hub VCN
@@ -133,11 +136,10 @@ egress_security_rules = {
 
       tcp_options = {
         destination_port_range = {
-          min = 22
-          max = 22
+          min = "22"
+          max = "22"
         }
       }
     }
   ]
-
 }

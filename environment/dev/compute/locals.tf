@@ -1,9 +1,9 @@
 locals {
 
   availability_domain_ids = {
-    AD1_key = "Xmsk:EU-FRANKFURT-1-AD-1"
-    AD2_key = ""
-    AD3_key = ""
+    AD1 = "Xmsk:EU-FRANKFURT-1-AD-1"
+    AD2 = ""
+    AD3 = ""
   }
 
   compartment_ids = merge(
