@@ -21,6 +21,6 @@ instances = {
     instance_memory_in_gbs           = "24"
     instance_ocpus                   = "2"
     instance_boot_volume_size_in_gbs = "70"
-    instance_image_id                = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa4vgbg74nu5srfbe37nawmyrlc5csbgmprclortb7q563gob3nedq" # Hub VM custom image ID
+    instance_image_id                = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaoiwaatpf6sjtuhyoupgloykq72wydgv2u36q6wqqjxke5vkwmyzq" # Hub VM custom image ID
   }
 }

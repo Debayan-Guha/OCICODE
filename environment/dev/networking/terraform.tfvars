@@ -1,5 +1,4 @@
 vcns = {
-
   "flipkart_dev_hub_vcn" = {
     cidr_blocks = ["10.0.0.0/24"]
     cmp         = "flipkart_dev_hub_network_cmp"
@@ -22,16 +21,19 @@ gws = {
       cmp = "flipkart_dev_hub_network_cmp"
     }
   }
+  ngws = {
+    "flipkart_dev_spoke1_ngw" = {
+      cmp = "flipkart_dev_spoke1_network_cmp"
+      vcn = "flipkart_dev_spoke1_vcn1"
+    }
+  }
 }
 
-
 drg_attachments = {
-
   "flipkart_dev_hub_drg_attachment" = {
     drg = "flipkart_dev_hub_drg"
     vcn = "flipkart_dev_hub_vcn"
-  }
-
+  },
   "flipkart_dev_spoke1_drg_attachment" = {
     drg = "flipkart_dev_hub_drg"
     vcn = "flipkart_dev_spoke1_vcn1"
@@ -46,15 +48,13 @@ rts = {
     cmp         = "flipkart_dev_hub_network_cmp"
     vcn         = "flipkart_dev_hub_vcn"
     route_rules = "flipkart_dev_hub_public_subnet_rt_rules"
-  }
-
+  },
   "flipkart_dev_spoke1_vcn1_private_subnet_rt" = {
     cmp         = "flipkart_dev_spoke1_network_cmp"
     vcn         = "flipkart_dev_spoke1_vcn1"
     route_rules = "flipkart_dev_spoke1_vcn1_app_private_subnet1_rt_rules"
   }
 }
-
 
 sls = {
 
@@ -63,17 +63,14 @@ sls = {
     vcn                    = "flipkart_dev_hub_vcn"
     egress_security_rules  = "flipkart_dev_hub_public_subnet_sl_egress_rules"
     ingress_security_rules = "flipkart_dev_hub_public_subnet_sl_ingress_rules"
-  }
-
+  },
   "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl" = {
     cmp                    = "flipkart_dev_spoke1_network_cmp"
     vcn                    = "flipkart_dev_spoke1_vcn1"
     egress_security_rules  = "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_egress_rules"
     ingress_security_rules = "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_ingress_rules"
   }
-
 }
-
 
 subnets = {
   "flipkart_dev_hub_public_subnet" = {

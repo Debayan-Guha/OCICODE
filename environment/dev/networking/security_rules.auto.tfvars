@@ -60,7 +60,20 @@ ingress_security_rules = {
 
       description = "Allow ICMP from Hub VCN."
     },
+    {
+      source_type = "CIDR_BLOCK"
+      source      = "10.0.0.0/24" # Hub VCN
+      protocol    = "6"           # TCP
 
+      description = "Allow SSH from Hub VCN."
+
+      tcp_options = {
+        destination_port_range = {
+          min = "22"
+          max = "22"
+        }
+      }
+    },
     {
       source_type = "CIDR_BLOCK"
       source      = "10.0.0.0/24" # Hub VCN
@@ -126,7 +139,6 @@ egress_security_rules = {
 
       description = "Allow ICMP to Hub VCN."
     },
-
     {
       destination_type = "CIDR_BLOCK"
       destination      = "10.0.0.0/24" # Hub VCN
@@ -140,6 +152,20 @@ egress_security_rules = {
           max = "22"
         }
       }
+    },
+    {
+      destination_type = "CIDR_BLOCK"
+      destination      = "0.0.0.0/0"
+      protocol         = "1"         
+
+      description = "Allow ICMP to Internet (Outside)"
+    },
+    {
+      destination_type = "CIDR_BLOCK"
+      destination      = "0.0.0.0/0" 
+      protocol         = "6"         
+
+      description = "Download anything from internet"
     }
   ]
 }

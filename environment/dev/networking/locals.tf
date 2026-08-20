@@ -6,6 +6,9 @@ locals {
     },
     {
       for k, v in module.drg : k => v.drg_id
+    },
+    {
+      for k, v in module.ngw : k => v.ngw_id
     }
   )
 

@@ -31,6 +31,16 @@ module "igw" {
   igw_vcn_id       = module.vcn[each.value.vcn].vcn_id
 }
 
+module "ngw" {
+  source = "../../../modules/networking/gw/ngw"
+
+  for_each = var.gws != null && var.gws.ngws != null ? var.gws.ngws : {}
+
+  ngw_cmp_id       = local.compartment_ids[each.value.cmp]
+  ngw_display_name = each.key
+  ngw_vcn_id       = module.vcn[each.value.vcn].vcn_id
+}
+
 module "drg" {
   source = "../../../modules/networking/gw/drg"
 
@@ -43,11 +53,11 @@ module "drg" {
 module "drg_attachment" {
   source = "../../../modules/networking/gw/drg_attachment"
 
-  for_each = var.drg_attachments !=null ? var.drg_attachments : {}
+  for_each = var.drg_attachments != null ? var.drg_attachments : {}
 
-  drg_attachment_drg_id = module.drg[each.value.drg].drg_id
+  drg_attachment_drg_id       = module.drg[each.value.drg].drg_id
   drg_attachment_display_name = each.key
-  drg_attachment_vcn_id = module.vcn[each.value.vcn].vcn_id
+  drg_attachment_vcn_id       = module.vcn[each.value.vcn].vcn_id
 }
 
 module "rt" {
