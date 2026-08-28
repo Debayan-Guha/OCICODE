@@ -41,6 +41,17 @@ module "ngw" {
   ngw_vcn_id       = module.vcn[each.value.vcn].vcn_id
 }
 
+module "sgw" {
+  source = "../../../modules/networking/gw/sgw"
+  
+  for_each = var.gws != null && var.gws.sgws != null ? var.gws.sgws : {}
+
+  sgw_cmp_id       = local.compartment_ids[each.value.cmp]
+  sgw_vcn_id       = module.vcn[each.value.vcn].vcn_id
+  sgw_display_name = each.key
+  sgw_service_id   = local.object_storage_service_id
+}
+
 module "drg" {
   source = "../../../modules/networking/gw/drg"
 

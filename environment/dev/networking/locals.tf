@@ -9,6 +9,9 @@ locals {
     },
     {
       for k, v in module.ngw : k => v.ngw_id
+    },
+    {
+      for k, v in module.sgw : k => v.sgw_id
     }
   )
 
@@ -26,5 +29,10 @@ locals {
   # Map 4: Already has keys ("flipkart_dev_spoke1_network_cmp", "flipkart_dev_spoke1_compute_and_storage_cmp")
   data.terraform_remote_state.dev_compartments.outputs.spoke1_inner_cmps_ids
 )
+
+ object_storage_service_id = [
+    for s in data.oci_core_services.all_services.services : s.id
+    if strcontains(s.name, "Object Storage")
+  ][0]
 
 }

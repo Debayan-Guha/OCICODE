@@ -26,6 +26,12 @@ route_rules = {
       destination      = "0.0.0.0/0"
       destination_type = "CIDR_BLOCK"
       description      = "Default route for internet traffic via NAT Gateway."
+    },
+    {
+      gw               = "flipkart_dev_spoke1_sgw"  
+      destination      = "all-services"
+      destination_type = "SERVICE_CIDR_BLOCK"
+      description      = "Route traffic to OCI Object Storage via Spoke Service Gateway"
     }
   ]
 }

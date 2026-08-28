@@ -27,6 +27,12 @@ gws = {
       vcn = "flipkart_dev_spoke1_vcn1"
     }
   }
+  sgws = {
+    "flipkart_dev_spoke1_sgw" = {
+      cmp = "flipkart_dev_spoke1_network_cmp"
+      vcn = "flipkart_dev_spoke1_vcn1"
+    }
+  }
 }
 
 drg_attachments = {

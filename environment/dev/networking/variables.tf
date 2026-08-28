@@ -76,12 +76,18 @@ variable "gws" {
       cmp = string
       vcn = string
     }))
+
+    sgws = map(object({
+      cmp = string
+      vcn = string
+    }))
   })
 
   default = {
     igws = null
     drgs = null
     ngws = null
+    sgws = null
   }
 }
 
