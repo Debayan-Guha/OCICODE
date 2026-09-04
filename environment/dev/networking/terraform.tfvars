@@ -3,7 +3,7 @@ vcns = {
     cidr_blocks = ["10.0.0.0/24"]
     cmp         = "flipkart_dev_hub_network_cmp"
   }
-  "flipkart_dev_spoke1_vcn1" = {
+  "flipkart_dev_spoke1_vcn" = {
     cidr_blocks = ["10.0.1.0/24"]
     cmp         = "flipkart_dev_spoke1_network_cmp"
   }
@@ -24,13 +24,13 @@ gws = {
   ngws = {
     "flipkart_dev_spoke1_ngw" = {
       cmp = "flipkart_dev_spoke1_network_cmp"
-      vcn = "flipkart_dev_spoke1_vcn1"
+      vcn = "flipkart_dev_spoke1_vcn"
     }
   }
   sgws = {
     "flipkart_dev_spoke1_sgw" = {
       cmp = "flipkart_dev_spoke1_network_cmp"
-      vcn = "flipkart_dev_spoke1_vcn1"
+      vcn = "flipkart_dev_spoke1_vcn"
     }
   }
 }
@@ -42,39 +42,45 @@ drg_attachments = {
   },
   "flipkart_dev_spoke1_drg_attachment" = {
     drg = "flipkart_dev_hub_drg"
-    vcn = "flipkart_dev_spoke1_vcn1"
+    vcn = "flipkart_dev_spoke1_vcn"
   }
-
 }
 
-
 rts = {
-
   "flipkart_dev_hub_public_subnet_rt" = {
     cmp         = "flipkart_dev_hub_network_cmp"
     vcn         = "flipkart_dev_hub_vcn"
     route_rules = "flipkart_dev_hub_public_subnet_rt_rules"
   },
-  "flipkart_dev_spoke1_vcn1_private_subnet_rt" = {
+  "flipkart_dev_spoke1_vcn_app_private_subnet_rt" = {
     cmp         = "flipkart_dev_spoke1_network_cmp"
-    vcn         = "flipkart_dev_spoke1_vcn1"
-    route_rules = "flipkart_dev_spoke1_vcn1_app_private_subnet1_rt_rules"
+    vcn         = "flipkart_dev_spoke1_vcn"
+    route_rules = "flipkart_dev_spoke1_vcn_app_private_subnet_rt_rules"
+  },
+  "flipkart_dev_spoke1_vcn_db_private_subnet_rt" = {
+    cmp         = "flipkart_dev_spoke1_network_cmp"
+    vcn         = "flipkart_dev_spoke1_vcn"
   }
 }
 
 sls = {
-
   "flipkart_dev_hub_public_subnet_sl" = {
     cmp                    = "flipkart_dev_hub_network_cmp"
     vcn                    = "flipkart_dev_hub_vcn"
     egress_security_rules  = "flipkart_dev_hub_public_subnet_sl_egress_rules"
     ingress_security_rules = "flipkart_dev_hub_public_subnet_sl_ingress_rules"
   },
-  "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl" = {
+  "flipkart_dev_spoke1_vcn_app_private_subnet_sl" = {
     cmp                    = "flipkart_dev_spoke1_network_cmp"
-    vcn                    = "flipkart_dev_spoke1_vcn1"
-    egress_security_rules  = "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_egress_rules"
-    ingress_security_rules = "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl_ingress_rules"
+    vcn                    = "flipkart_dev_spoke1_vcn"
+    egress_security_rules  = "flipkart_dev_spoke1_vcn_app_private_subnet_sl_egress_rules"
+    ingress_security_rules = "flipkart_dev_spoke1_vcn_app_private_subnet_sl_ingress_rules"
+  },
+  "flipkart_dev_spoke1_vcn_db_private_subnet_sl" = {
+    cmp                    = "flipkart_dev_spoke1_network_cmp"
+    vcn                    = "flipkart_dev_spoke1_vcn"
+    egress_security_rules  = "flipkart_dev_spoke1_vcn_db_private_subnet_sl_egress_rules"
+    ingress_security_rules = "flipkart_dev_spoke1_vcn_db_private_subnet_sl_ingress_rules"
   }
 }
 
@@ -89,14 +95,23 @@ subnets = {
     ]
     subnet_prohibit_public_ip_on_vnic = false
   }
-
-  "flipkart_dev_spoke1_vcn1_app_private_subnet1" = {
-    cmp = "flipkart_dev_spoke1_network_cmp"
+  "flipkart_dev_spoke1_vcn_app_private_subnet" = {
+    cmp        = "flipkart_dev_spoke1_network_cmp"
     cidr_block = "10.0.1.0/26"
-    vcn        = "flipkart_dev_spoke1_vcn1"
-    rt         = "flipkart_dev_spoke1_vcn1_private_subnet_rt"
+    vcn        = "flipkart_dev_spoke1_vcn"
+    rt         = "flipkart_dev_spoke1_vcn_app_private_subnet_rt"
     sl = [
-      "flipkart_dev_spoke1_vcn1_app_private_subnet1_sl"
+      "flipkart_dev_spoke1_vcn_app_private_subnet_sl"
+    ]
+    subnet_prohibit_public_ip_on_vnic = true
+  }
+  "flipkart_dev_spoke1_vcn_db_private_subnet" = {
+    cmp        = "flipkart_dev_spoke1_network_cmp"
+    cidr_block = "10.0.1.64/27"
+    vcn        = "flipkart_dev_spoke1_vcn"
+    rt         = "flipkart_dev_spoke1_vcn_db_private_subnet_rt"
+    sl = [
+      "flipkart_dev_spoke1_vcn_db_private_subnet_sl"
     ]
     subnet_prohibit_public_ip_on_vnic = true
   }
