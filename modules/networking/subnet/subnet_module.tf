@@ -10,4 +10,6 @@ resource "oci_core_subnet" "subnet" {
 
   prohibit_public_ip_on_vnic = var.subnet_prohibit_public_ip_on_vnic
 
+  dns_label = var.subnet_dns_label
+
 }

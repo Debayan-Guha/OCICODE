@@ -6,6 +6,7 @@ module "vcn" {
   vcn_cidr_blocks  = each.value.cidr_blocks
   vcn_cmp_id       = local.compartment_ids[each.value.cmp]
   vcn_display_name = each.key
+  vcn_dns_label = each.value.vcn_dns_label
 }
 
 module "sl" {
@@ -110,5 +111,7 @@ module "subnet" {
   ], null)
 
   subnet_prohibit_public_ip_on_vnic = each.value.subnet_prohibit_public_ip_on_vnic
+  
+  subnet_dns_label = each.value.subnet_dns_label
 }
 

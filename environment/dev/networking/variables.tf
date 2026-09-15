@@ -1,7 +1,8 @@
 variable "vcns" {
   type = map(object({
-    cidr_blocks = list(string)
-    cmp         = string
+    cidr_blocks   = list(string)
+    cmp           = string
+    vcn_dns_label = optional(string)
   }))
 }
 
@@ -131,5 +132,7 @@ variable "subnets" {
     sl = optional(list(string))
 
     subnet_prohibit_public_ip_on_vnic = bool
+
+    subnet_dns_label = optional(string)
   }))
 }

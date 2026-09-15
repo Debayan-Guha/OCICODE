@@ -27,3 +27,8 @@ variable "subnet_security_list_ids" {
 variable "subnet_prohibit_public_ip_on_vnic" {
   type = bool
 }
+
+variable "subnet_dns_label" {
+  type = string
+  default = null
+}

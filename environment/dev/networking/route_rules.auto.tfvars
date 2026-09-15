@@ -13,24 +13,18 @@ route_rules = {
       description      = "Route traffic from the Hub VCN to the Spoke1 VCN through the Dynamic Routing Gateway."
     }
   ],
-  "flipkart_dev_spoke1_vcn_web_private_subnet_rt_rules" = [
+  "flipkart_dev_spoke1_vcn_web_public_subnet_rt_rules" = [
     {
       gw               = "flipkart_dev_hub_drg"
       destination      = "10.0.0.0/24"
       destination_type = "CIDR_BLOCK"
-      description      = "Route traffic from the Spoke1 Web private subnet to the Hub VCN through the Dynamic Routing Gateway."
+      description      = "Route traffic from the Spoke1 Web public subnet to the Hub VCN through the Dynamic Routing Gateway."
     },
     {
-      gw               = "flipkart_dev_spoke1_ngw"
+      gw               = "flipkart_dev_spoke1_igw"
       destination      = "0.0.0.0/0"
       destination_type = "CIDR_BLOCK"
-      description      = "Route outbound Internet traffic from the Spoke1 Web private subnet through the NAT Gateway."
-    },
-    {
-      gw               = "flipkart_dev_spoke1_sgw"
-      destination      = "all-fra-services-in-oracle-services-network"
-      destination_type = "SERVICE_CIDR_BLOCK"
-      description      = "Route traffic from the Spoke1 Web private subnet to supported OCI services through the Service Gateway."
+      description      = "Route outbound Internet traffic from the Spoke1 Web public subnet through the Internet Gateway."
     }
   ],
   "flipkart_dev_spoke1_vcn_app_private_subnet_rt_rules" = [
@@ -39,6 +33,12 @@ route_rules = {
       destination      = "10.0.0.0/24"
       destination_type = "CIDR_BLOCK"
       description      = "Route traffic from the Spoke1 App private subnet to the Hub VCN through the Dynamic Routing Gateway."
+    },
+    {
+      gw               = "flipkart_dev_spoke1_ngw"
+      destination      = "0.0.0.0/0"
+      destination_type = "CIDR_BLOCK"
+      description      = "Route outbound Internet traffic from the Spoke1 App private subnet through the NAT Gateway."
     },
     {
       gw               = "flipkart_dev_spoke1_sgw"
