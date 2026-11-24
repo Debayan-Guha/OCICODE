@@ -1,59 +1,27 @@
-variable "sl_cmp_id" {
+variable "security_list_compartment_id" {
   type = string
 }
 
-variable "sl_vcn_id" {
+variable "security_list_vcn_id" {
   type = string
 }
 
-variable "sl_display_name" {
+variable "security_list_display_name" {
   type = string
 }
 
-variable "egress_security_rules" {
+variable "security_list_egress_security_rules" {
   type = list(object({
     destination      = string
     protocol         = string
     destination_type = string
-    description      = optional(string)
-
-    tcp_options = optional(object({
-
-      destination_port_range = object({
-        max = string
-        min = string
-      })
-
-      source_port_range = optional(object({
-        max = string
-        min = string
-      }))
-    }))
   }))
-
-  default = []
 }
 
-variable "ingress_security_rules" {
+variable "security_list_ingress_security_rules" {
   type = list(object({
-    source_type = string
-    protocol    = string
     source      = string
-    description = optional(string)
-
-      tcp_options = optional(object({
-
-      destination_port_range = object({
-        max = string
-        min = string
-      })
-
-      source_port_range = optional(object({
-        max = string
-        min = string
-      }))
-    }))
+    protocol    = string
+    source_type = string
   }))
-
-  default = []
 }

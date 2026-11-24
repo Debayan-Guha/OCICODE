@@ -1,3 +1,3 @@
-output "sl_id" {
-  value = oci_core_security_list.security_list.id
+output "security_list_id" {
+  value = oci_core_security_list.test_security_list.id
 }

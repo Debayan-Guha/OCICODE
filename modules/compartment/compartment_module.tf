@@ -1,7 +1,4 @@
-resource "oci_identity_compartment" "compartment" {
-
-  compartment_id = var.parent_cmp_id
-  name           = var.cmp_name
-  description    = var.cmp_description
-  enable_delete  = var.cmp_enable_delete
+resource "oci_identity_compartment" "test_compartment" {
+  compartment_id = var.compartment_parent_id
+  name           = var.compartment_name
 }

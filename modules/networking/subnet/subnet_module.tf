@@ -1,15 +1,11 @@
-resource "oci_core_subnet" "subnet" {
+resource "oci_core_subnet" "test_subnet" {
 
-  cidr_block     = var.subnet_cidr_block
-  compartment_id = var.subnet_cmp_id
+  compartment_id = var.subnet_compartment_id
   vcn_id         = var.subnet_vcn_id
-
-  display_name      = var.subnet_display_name
-  route_table_id    = var.subnet_route_table_id
-  security_list_ids = var.subnet_security_list_ids
+  cidr_block     = var.subnet_cidr_block
+  display_name   = var.subnet_display_name
 
   prohibit_public_ip_on_vnic = var.subnet_prohibit_public_ip_on_vnic
-
-  dns_label = var.subnet_dns_label
-
+  route_table_id             = var.subnet_route_table_id
+  security_list_ids          = var.subnet_security_list_ids
 }

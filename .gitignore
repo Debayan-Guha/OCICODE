@@ -1,42 +1,19 @@
-# ========================================
-# TERRAFORM CORE
-# ========================================
+# Ignore everything in secrets and provider except .gitkeep
+secrets/*
+!secrets/.gitkeep
 
-# State files (anywhere)
-**/*.tfstate
-**/*.tfstate.*
-**/*.tfstate.backup
-**/crash.log
-**/crash.*.log
+provider/*
+!provider/.gitkeep
 
-# Local directories and plugins
-**/.terraform/
-**/.terraform.lock.hcl
-**/.terraform.tfstate.lock.info
-
-# CLI config
-.terraformrc
-terraform.rc
-
-# ========================================
-# SECURITY & CREDENTIALS
-# ========================================
-
-# Sensitive file extensions (anywhere)
-*.pem
-*.key
-*.pub
-
-# Specific sensitive config files
-provider.tf
+# Standard Terraform ignores (prevents leaking state files)
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars.json
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
-
-# ========================================
-# EXCEPTIONS (Keep Structure)
-# ========================================
-
-# Keep directory markers (but not the files themselves if they are empty)
-!**/.gitkeep
+.terraformrc
+terraform.rc
